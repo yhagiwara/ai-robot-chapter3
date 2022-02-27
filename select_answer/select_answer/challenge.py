@@ -1,3 +1,6 @@
+# チャレンジ問題に対しての回答です
+# この後，丁寧な解説を記述します
+
 import rclpy
 import rclpy.node
 from std_msgs.msg import String
