@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'select_answer_pkg'
+package_name = 'select_answer'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'select_answer = select_answer_pkg.select_answer:main'
+            'select_answer = select_answer.select_answer:main'
         ],
     },
 )

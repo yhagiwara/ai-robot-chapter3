@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'speech_synthesis_pkg'
+package_name = 'speech_synthesis'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'speech_synthesis = speech_synthesis_pkg.speech_synthesis:main'
+            'speech_synthesis = speech_synthesis.speech_synthesis:main'
         ],
     },
 )

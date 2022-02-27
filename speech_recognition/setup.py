@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'speech_recognition_pkg'
+package_name = 'speech_recognition'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'speech_recognition = speech_recognition_pkg.speech_recognition:main'
+            'speech_recognition = speech_recognition.speech_recognition:main'
         ],
     },
 )
