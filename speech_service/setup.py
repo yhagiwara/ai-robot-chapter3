@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'speech_service = scripts.speech_service:main',
+            'voice_server = scripts.voice_server:main',
             'recognition = scripts.recognition:main',
             'synthesis = scripts.synthesis:main'
         ],

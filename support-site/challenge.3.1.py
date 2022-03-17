@@ -38,6 +38,12 @@ class SpeechOfBringMe(rclpy.node.Node):
 
         text = None
 
+        if request.command == 'ask object':
+            pass
+
+        elif request.command == 'ask place':
+            pass
+
         while text is None:
             text = self.recognition()
 
