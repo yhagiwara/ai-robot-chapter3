@@ -2,7 +2,6 @@ import rclpy
 import rclpy.node    
 from ai_robot_book_interfaces.srv import StringCommand
 
-from time import sleep    
 import speech_recognition as sr    
 import pyaudio    
     
@@ -11,9 +10,8 @@ class SpeechRecognition(rclpy.node.Node):
         super().__init__("speech_recognition")    
     
         self.logger = self.get_logger()    
-        self.logger.info("音声認識を開始します")    
+        self.logger.info("音声認識を起動します")
     
-        self.period = 5.0    
         self.init_rec = sr.Recognizer()    
     
         self.service = self.create_service(StringCommand, '/speech/recognition', self.recognition)
