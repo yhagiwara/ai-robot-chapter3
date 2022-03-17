@@ -1,11 +1,11 @@
 from setuptools import setup
 
-package_name = 'speech_recognition'
+package_name = 'speech_service'
 
 setup(
     name=package_name,
     version='0.0.0',
-    packages=[package_name],
+    packages=['scripts'],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -13,14 +13,16 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='root',
-    maintainer_email='root@todo.todo',
+    maintainer='ito-masaki',
+    maintainer_email='ito.masaki@em.ci.ritsumei.ac.jp',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'speech_recognition = speech_recognition.speech_recognition:main'
+            'speech_service = scripts.speech_service:main',
+            'recognition = scripts.recognition:main',
+            'synthesis = scripts.synthesis:main'
         ],
     },
 )

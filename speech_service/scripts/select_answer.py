@@ -14,18 +14,17 @@ class SelectAnswer(rclpy.node.Node):
     
         self.Questions = {"Bring me a bottle from kitchen":"Ok, I will"}    
     
-        self.text_sub = self.create_subscription(String, "recognized_text", self.select_answer, 10)    
-        self.answer_pub = self.create_publisher(String, "answer_text", 10)    
+        self.service = self.create_service(StringCommand, '/speech/command', self.select_answer)
         
-    def select_answer(self, msg):    
-        self.logger.info("Subscribe text '{}'".format(msg.data))    
+    def select_answer(self, request, response):    
+        self.logger.info("Subscribe text '{}'".format(request.command))    
     
         answer = ""    
         ratio = 0.0    
         t_ratio = 0.0    
     
         for key, value in self.Questions.items():    
-            t_ratio = Levenshtein.ratio(msg.data, key)    
+            t_ratio = Levenshtein.ratio(request.command, key)
             self.logger.info("Ratio : {} | Compared '{}' and '{}'".format(round(t_ratio, 3), key, msg.data))    
     
             if t_ratio > ratio:    
