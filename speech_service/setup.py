@@ -5,7 +5,7 @@ package_name = 'speech_service'
 setup(
     name=package_name,
     version='0.0.0',
-    packages=['scripts'],
+    packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -20,7 +20,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'voice_server = scripts.voice_server:main',
             'recognition = scripts.recognition:main',
             'synthesis = scripts.synthesis:main'
         ],
