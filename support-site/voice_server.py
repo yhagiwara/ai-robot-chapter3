@@ -14,7 +14,7 @@ import pyaudio
 from io import BytesIO
 from mpg123 import Mpg123, Out123
 
-class SpeechOfBringMe(rclpy.node.Node):
+class VoiceServer(rclpy.node.Node):
     def __init__(self):
         super().__init__("speech_recognition")
 
@@ -107,10 +107,10 @@ class SpeechOfBringMe(rclpy.node.Node):
 def main():
     rclpy.init()
 
-    speech_of_bring_me = SpeechOfBringMe()
+    voice_server = VoiceServer()
 
-    rclpy.spin(speech_of_bring_me)
-    speech_of_bring_me.destroy_node()
+    rclpy.spin(voice_server)
+    voice_server.destroy_node()
 
     rclpy.shutdown()
 
