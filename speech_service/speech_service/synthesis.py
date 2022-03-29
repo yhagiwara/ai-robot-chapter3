@@ -11,7 +11,7 @@ class Synthesis(rclpy.node.Node):
     def __init__(self):
         super().__init__("speech_synthesis")
 
-        self.get_logger.info('音声合成ノードを起動します')
+        self.get_logger().info('音声合成ノードを起動します')
 
         self.lang = 'ja-JP'
         self.mp3 = Mpg123()

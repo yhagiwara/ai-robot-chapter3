@@ -16,10 +16,9 @@ from mpg123 import Mpg123, Out123
 
 class VoiceServer(rclpy.node.Node):
     def __init__(self):
-        super().__init__("speech_recognition")
+        super().__init__("voice_server")
 
-        self.logger = self.get_logger()
-        self.logger.info("音声サーバーを起動しました")
+        self.get_logger().info("音声サーバーを起動しました")
 
         self.period = 5.0
         self.init_rec = sr.Recognizer()
@@ -35,8 +34,8 @@ class VoiceServer(rclpy.node.Node):
 
     def command_callback(self, request, response):
 
-        self.speech_synthesis('I\'m ready.')
-        self.logger.info('I\'m ready.')
+        self.synthesis('I\'m ready.')
+        self.get_logger().info('I\'m ready.')
 
         text = None
         while text is None:
@@ -44,8 +43,8 @@ class VoiceServer(rclpy.node.Node):
 
         target_object, target_palce = self.search_object_and_place(text)
 
-        self.speech_synthesis(f'I will go to the {target_palce} and grab a {target_object}')
-        self.logger.info(f'I will go to the {target_palce} and grab a {target_object}')
+        self.synthesis(f'I will go to the {target_palce} and grab a {target_object}')
+        self.get_logger().info(f'I will go to the {target_palce} and grab a {target_object}')
 
 
         if (target_object is not None) and (target_palce is not None):
@@ -59,23 +58,22 @@ class VoiceServer(rclpy.node.Node):
 
         with sr.Microphone() as source:
             audio_data = self.init_rec.record(source, duration=5)
-            self.logger.info(f'音声認識を行います')
+            self.get_logger().info(f'音声認識を行います')
 
             try:
                 text = self.init_rec.recognize_google(audio_data)
-                self.logger.info(text)
+                self.get_logger().info(text)
 
             except sr.UnknownValueError:
                 pass
 
-        # text = 'Bring me a bottle from the kitchen'
-        self.logger.info(f'認識したテキストは "{text}" です')
+        self.get_logger().info(f'認識したテキストは "{text}" です')
 
         return text
 
     def search_object_and_place(self, text):
 
-        self.logger.info(f'Get text "{text}"')
+        self.get_logger().info(f'受けとったテキスト "{text}"')
 
         target_object = None
         target_place = None
@@ -90,7 +88,7 @@ class VoiceServer(rclpy.node.Node):
 
         return target_object, target_place
 
-    def speech_synthesis(self, text):
+    def synthesis(self, text):
 
         self.get_logger().info('音声合成')
 
