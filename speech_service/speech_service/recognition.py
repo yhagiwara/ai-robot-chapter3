@@ -37,12 +37,14 @@ class Recognition(rclpy.node.Node):
         self.publisher.publish(msg)
 
 
-def main():
-    rclpy.init()
-
-    recognition_node = Recognition()
-
-    recognition_node.recognition()
-    recognition_node.destroy_node()
-
+def main():    
+    rclpy.init()    
+    
+    recognition_node = Recognition()    
+    
+    try:
+        recognition_node.recognition()   
+    except:
+        recognition_node.destroy_node()    
+    
     rclpy.shutdown()
