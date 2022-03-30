@@ -18,38 +18,37 @@ class SpeechService(rclpy.node.Node):
 
         self.init_rec = sr.Recognizer()
 
-        self.service = self.create_service(StringCommand, '/speech_server/wake_up', self.command_callback)
+        self.service = self.create_service(StringCommand, '/speech_service/wake_up', self.command_callback)
 
         self.lang = 'en'
         self.mp3 = Mpg123()
         self.out = Out123()
 
-    def command_callback(self, request, response):
-
+    def command_callback(self, request, response):    
+    
         self.synthesis('I\'m ready.')
-        self.get_logger().info('I\'m ready.')
-
-        text = None
-        while text is None:
-            text = self.recognition()
-
-        self.synthesis(f'{text}')
-        self.get_logger().info(f'{text}')
-
+    
+        text = None    
+        while text is None:    
+            text = self.recognition()    
+    
+        self.synthesis(text)
+    
         response.answer = 'done'
         return response
 
     def recognition(self):
-
+        text = ''
+        
         with sr.Microphone() as source:
-            audio_data = self.init_rec.record(source, duration=5)
-            self.get_logger().info(f'音声認識を行います')
-
-            try:
-                text = self.init_rec.recognize_google(audio_data)
-
-            except sr.UnknownValueError:
-                pass
+            while text == '':
+                audio_data = self.init_rec.record(source, duration=5)
+                self.get_logger().info(f'音声認識を行います')
+        
+                try:
+                    text = self.init_rec.recognize_google(audio_data)
+                except sr.UnknownValueError:
+                    pass
 
         self.get_logger().info(f'認識したテキストは "{text}" です')
 
@@ -57,7 +56,8 @@ class SpeechService(rclpy.node.Node):
 
     def synthesis(self, text):
 
-        self.get_logger().info('音声合成')
+        self.get_logger().info(f'音声合成を実行します')
+        self.get_logger().info(f'発話内容は "{text}"')
 
         tts = gTTS(text, lang=self.lang[:2])
         fp = BytesIO()
@@ -74,9 +74,7 @@ def main():
 
     speech_service = SpeechService()
 
-    try:
-        rclpy.spin(speech_service)
-    except:
-        speech_service.destroy_node()
+    rclpy.spin(speech_service)
+    speech_service.destroy_node()
 
     rclpy.shutdown()
