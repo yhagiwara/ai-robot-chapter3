@@ -20,7 +20,7 @@ class Synthesis(rclpy.node.Node):
         self.subscriber = self.create_subscription(String, '/speech', self.synthesis, 1)
 
     def synthesis(self, msg):
-        self.get_logger().info('音声合成')
+        self.get_logger().info('音声合成を実行します')
 
         text = msg.data
         self.get_logger().info(f'\"{text}\"と発話します')
