@@ -1,6 +1,6 @@
 import rclpy
 import rclpy.node
-from ai_robot_book_interfaces.srv import StringCommand
+from airobot_interfaces.srv import StringCommand
 
 from gtts import gTTS
 from subprocess import run, PIPE
